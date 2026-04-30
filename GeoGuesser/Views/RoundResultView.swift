@@ -72,11 +72,44 @@ struct RoundResultView: View {
     }
 
     var resultMessage: String {
-        if result.totalScore >= 9 { return "You know your own life ✨" }
-        if result.totalScore >= 7 { return "Pretty close, memory champ" }
-        if result.totalScore >= 5 { return "It's coming back to you..." }
-        if result.totalScore >= 3 { return "Your past is a blur, huh?" }
-        return "Did this even happen? 🌫️"
+        let tier: [String]
+        if result.totalScore >= 9 {
+            tier = [
+                "You know your own life ✨",
+                "Living in the memories 🌟",
+                "Sharp as a tack",
+                "Nothing gets past you"
+            ]
+        } else if result.totalScore >= 7 {
+            tier = [
+                "Pretty close, memory champ",
+                "Almost had it",
+                "Your memory's not bad at all",
+                "Just a little off"
+            ]
+        } else if result.totalScore >= 5 {
+            tier = [
+                "It's coming back to you...",
+                "Somewhere in the ballpark",
+                "A hazy but honest attempt",
+                "Not your worst guess"
+            ]
+        } else if result.totalScore >= 3 {
+            tier = [
+                "Your past is a blur, huh?",
+                "Time is a flat circle",
+                "When was this again?",
+                "The mind forgets what the heart felt"
+            ]
+        } else {
+            tier = [
+                "Did this even happen? 🌫️",
+                "A mystery from your own life",
+                "Complete blackout",
+                "Were you even there?"
+            ]
+        }
+        return tier[abs(result.id.hashValue) % tier.count]
     }
 
     // MARK: Date
@@ -92,7 +125,7 @@ struct RoundResultView: View {
                     Text("Your guess")
                         .font(.system(size: 11, design: .rounded))
                         .foregroundColor(Color(red: 0.55, green: 0.45, blue: 0.38))
-                    Text("\(monthNames[result.guessedMonth - 1]) \(result.guessedYear)")
+                    Text("\(monthNames[result.guessedMonth - 1]) \(String(result.guessedYear))")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
                 }
@@ -101,7 +134,7 @@ struct RoundResultView: View {
                     Text("Actual")
                         .font(.system(size: 11, design: .rounded))
                         .foregroundColor(Color(red: 0.55, green: 0.45, blue: 0.38))
-                    Text("\(monthNames[result.actualMonth - 1]) \(result.actualYear)")
+                    Text("\(monthNames[result.actualMonth - 1]) \(String(result.actualYear))")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                         .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
                 }
