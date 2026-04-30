@@ -119,42 +119,53 @@ struct RoundResultView: View {
             Label("Date", systemImage: "calendar")
                 .font(.system(size: 15, weight: .semibold, design: .rounded))
                 .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
-
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Your guess")
-                        .font(.system(size: 11, design: .rounded))
-                        .foregroundColor(Color(red: 0.55, green: 0.45, blue: 0.38))
-                    Text("\(monthNames[result.guessedMonth - 1]) \(String(result.guessedYear))")
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text("Actual")
-                        .font(.system(size: 11, design: .rounded))
-                        .foregroundColor(Color(red: 0.55, green: 0.45, blue: 0.38))
-                    Text("\(monthNames[result.actualMonth - 1]) \(String(result.actualYear))")
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
-                }
-            }
-
-            HStack(spacing: 8) {
-                ScoreChip(
-                    label: result.yearScore == 2 ? "Year ✓" : "Year ✗",
-                    points: result.yearScore,
-                    correct: result.yearScore > 0
-                )
-                ScoreChip(
-                    label: result.monthScore == 2 ? "Month ✓" : "Month ✗",
-                    points: result.monthScore,
-                    correct: result.monthScore > 0
-                )
-            }
+            dateComparisonRow
+            dateScoreChips
         }
         .padding(14)
         .background(RoundedRectangle(cornerRadius: 16).fill(Color.white.opacity(0.60)))
+    }
+
+    private var dateComparisonRow: some View {
+        HStack(alignment: .top) {
+            dateColumn(
+                label: "Your guess",
+                value: "\(monthNames[result.guessedMonth - 1]) \(String(result.guessedYear))",
+                alignment: .leading
+            )
+            Spacer()
+            dateColumn(
+                label: "Actual",
+                value: "\(monthNames[result.actualMonth - 1]) \(String(result.actualYear))",
+                alignment: .trailing
+            )
+        }
+    }
+
+    private func dateColumn(label: String, value: String, alignment: HorizontalAlignment) -> some View {
+        VStack(alignment: alignment, spacing: 4) {
+            Text(label)
+                .font(.system(size: 11, design: .rounded))
+                .foregroundColor(Color(red: 0.55, green: 0.45, blue: 0.38))
+            Text(value)
+                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundColor(Color(red: 0.22, green: 0.15, blue: 0.10))
+        }
+    }
+
+    private var dateScoreChips: some View {
+        HStack(spacing: 8) {
+            ScoreChip(
+                label: result.yearScore == 2 ? "Year ✓" : "Year ✗",
+                points: result.yearScore,
+                correct: result.yearScore > 0
+            )
+            ScoreChip(
+                label: result.monthScore == 2 ? "Month ✓" : "Month ✗",
+                points: result.monthScore,
+                correct: result.monthScore > 0
+            )
+        }
     }
 
     // MARK: Location
