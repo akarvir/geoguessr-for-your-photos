@@ -1,14 +1,6 @@
 # Roll Guesser
 
-A personal GeoGuesser for your iPhone camera roll. Each round picks 5 random geotagged photos and asks you to identify when and where they were taken.
-
-## How it works
-
-**Guess.** For each photo you pick the year (multiple choice), the month, and drop a pin on a map zoomed to the region where the photo was taken.
-
-**Score.** Year correct earns 2 pts. Month correct earns 2 pts. Location is scored on distance, up to 6 pts for a pin within 10 km. Each photo is worth 10 pts, 50 pts per round.
-
-**Review.** After each guess you see exactly how close you were: your date vs the actual date, your pin coordinates vs the real ones, and a distance in km.
+I take a lot of pictures, but don't revisit them as often, and as a result they fade from memory. However, when I do see one, I begin to recall everything about the memory; I feel like I'm reliving it. Each round, this app takes five random photos from my Camera Roll and makes me identify the year, the month and the location the photo was taken. As I work to guess these things, the memories from the photo come flooding back, and I get to experience them again. 
 
 ## Screenshots
 
